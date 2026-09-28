@@ -33,10 +33,10 @@ jobs:
 
       - name: 🔄 Sync LeetCode Solved Problems
         env:
-          LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
+          LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME || 'Sethupathi_1228' }}
           LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
         run: |
-          python sync.py --limit ${{ github.event.inputs.limit || '30' }}
+          python sync.py --limit ${{ github.event.inputs.limit || '50' }}
 
       - name: 🚀 Commit and Push Changes
         run: |

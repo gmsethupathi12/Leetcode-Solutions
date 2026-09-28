@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Load existing settings
   const stored = await chrome.storage.sync.get(["ghRepo", "ghToken", "ghBranch", "autoSyncEnabled"]);
-  if (stored.ghRepo) ghRepoInput.value = stored.ghRepo;
+  ghRepoInput.value = stored.ghRepo || "gmsethupathi12/Leetcode-Solutions";
   if (stored.ghToken) ghTokenInput.value = stored.ghToken;
   if (stored.ghBranch) ghBranchInput.value = stored.ghBranch;
   if (typeof stored.autoSyncEnabled !== "undefined") {
