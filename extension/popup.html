@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeetCode Auto-Sync</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <div class="title-wrap">
+      <div class="logo">⚡</div>
+      <div>
+        <h1>LeetCode Sync</h1>
+        <p class="subtitle">1-Second Auto-Commit to GitHub</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div id="status-card" class="status-card disconnected">
+      <span class="status-dot"></span>
+      <span id="status-text">Not Connected</span>
+    </div>
+
+    <div class="form-group">
+      <label for="ghRepo">GitHub Repository</label>
+      <input type="text" id="ghRepo" placeholder="username/my-leetcode-repo" autocomplete="off" />
+      <span class="hint">Format: <code>owner/repository-name</code></span>
+    </div>
+
+    <div class="form-group">
+      <label for="ghToken">Personal Access Token (PAT)</label>
+      <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
+      <span class="hint">Needs <code>repo</code> (contents write) permission. <a href="https://github.com/settings/tokens/new?scopes=repo&description=LeetCode%20Auto%20Sync" target="_blank">Create token &rarr;</a></span>
+    </div>
+
+    <div class="form-group">
+      <label for="ghBranch">Target Branch</label>
+      <input type="text" id="ghBranch" value="main" placeholder="main" />
+    </div>
+
+    <div class="form-group toggle-group">
+      <label for="autoSyncToggle">Auto-Sync on Accept</label>
+      <label class="switch">
+        <input type="checkbox" id="autoSyncToggle" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="button-row">
+      <button id="testBtn" class="btn btn-secondary">Test Connection</button>
+      <button id="saveBtn" class="btn btn-primary">Save Settings</button>
+    </div>
+
+    <div id="message" class="message hidden"></div>
+  </div>
+
+  <div class="footer">
+    <span>Organized by Data Structure Topics</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
