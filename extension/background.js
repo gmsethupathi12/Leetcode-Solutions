@@ -1,4 +1,9 @@
 // Background Service Worker for LeetCode GitHub Auto-Sync
+try {
+  importScripts("env.js");
+} catch (e) {
+  // env.js is optional
+}
 
 // UTF-8 safe Base64 encoder
 function utf8ToBase64(str) {
@@ -144,7 +149,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           return;
         }
 
-        const { ghRepo, ghToken, ghBranch = "main" } = stored;
+        const env = self.LEETCODE_SYNC_ENV || {};
+        const ghRepo = stored.ghRepo || env.repo || "gmsethupathi12/Leetcode-Solutions";
+        const ghToken = stored.ghToken || env.token;
+        const ghBranch = stored.ghBranch || env.branch || "main";
+
         if (!ghRepo || !ghToken) {
           sendResponse({ success: false, error: "GitHub repository or Personal Access Token not configured." });
           return;

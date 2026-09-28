@@ -28,17 +28,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Load existing settings
+  // Load existing settings or fallback to local env
+  const env = window.LEETCODE_SYNC_ENV || {};
   const stored = await chrome.storage.sync.get(["ghRepo", "ghToken", "ghBranch", "autoSyncEnabled"]);
-  ghRepoInput.value = stored.ghRepo || "gmsethupathi12/Leetcode-Solutions";
-  if (stored.ghToken) ghTokenInput.value = stored.ghToken;
-  if (stored.ghBranch) ghBranchInput.value = stored.ghBranch;
+  
+  const activeRepo = stored.ghRepo || env.repo || "gmsethupathi12/Leetcode-Solutions";
+  const activeToken = stored.ghToken || env.token || "";
+  const activeBranch = stored.ghBranch || env.branch || "main";
+
+  ghRepoInput.value = activeRepo;
+  ghTokenInput.value = activeToken;
+  ghBranchInput.value = activeBranch;
+
   if (typeof stored.autoSyncEnabled !== "undefined") {
     autoSyncToggle.checked = stored.autoSyncEnabled;
   }
 
-  if (stored.ghRepo && stored.ghToken) {
-    updateStatus(true, stored.ghRepo);
+  // Auto-connect if token is present
+  if (activeRepo && activeToken) {
+    updateStatus(true, activeRepo);
+    if (!stored.ghToken) {
+      await chrome.storage.sync.set({
+        ghRepo: activeRepo,
+        ghToken: activeToken,
+        ghBranch: activeBranch,
+        autoSyncEnabled: true
+      });
+    }
   }
 
   // Save Settings
