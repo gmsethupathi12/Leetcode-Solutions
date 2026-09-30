@@ -3,8 +3,8 @@
 > Auto-synced repository containing solved LeetCode problems organized strictly by data structure and algorithmic topics.
 
 ![LeetCode Sync](https://img.shields.io/badge/LeetCode-Sync-orange?logo=leetcode)
-![Problems Solved](https://img.shields.io/badge/Solved-31-brightgreen)
-![Easy](https://img.shields.io/badge/Easy-18-green)
+![Problems Solved](https://img.shields.io/badge/Solved-32-brightgreen)
+![Easy](https://img.shields.io/badge/Easy-19-green)
 ![Medium](https://img.shields.io/badge/Medium-8-yellow)
 ![Hard](https://img.shields.io/badge/Hard-5-red)
 
@@ -14,7 +14,7 @@
 
 | Total Solved | Easy | Medium | Hard |
 |:---:|:---:|:---:|:---:|
-| **31** | 18 | 8 | 5 |
+| **32** | 19 | 8 | 5 |
 
 ---
 
@@ -83,11 +83,12 @@
 | 12 | [Integer to Roman](strings/12_integer_to_roman.md) | `Medium` | [View Solution](strings/12_integer_to_roman.md) |
 | 151 | [Reverse Words in a String](strings/151_reverse_words.md) | `Medium` | [View Solution](strings/151_reverse_words.md) |
 
-### 🌳 Trees (3)
+### 🌳 Trees (4)
 
 | # | Problem Title | Difficulty | Solution |
 |:---:|:---|:---:|:---:|
 | 94 | [Binary Tree Inorder Traversal](trees/94_binary_tree_inorder_traversal.md) | `Easy` | [View Solution](trees/94_binary_tree_inorder_traversal.md) |
+| 100 | [Same Tree](trees/100_same_tree.md) | `Easy` | [View Solution](trees/100_same_tree.md) |
 | 104 | [Maximum Depth of Binary Tree](trees/104_maximum_depth_of_binary_tree.md) | `Easy` | [View Solution](trees/104_maximum_depth_of_binary_tree.md) |
 | 226 | [Invert Binary Tree](trees/226_invert_binary_tree.md) | `Easy` | [View Solution](trees/226_invert_binary_tree.md) |
 

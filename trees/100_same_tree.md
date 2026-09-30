@@ -1,0 +1,64 @@
+# 100. Same Tree
+
+![Easy](https://img.shields.io/badge/Difficulty-Easy-green)
+![Topic](https://img.shields.io/badge/Topic-trees-blue)
+
+- **LeetCode Link:** [Same Tree](https://leetcode.com/problems/same-tree/)
+- **Topic:** Tree, Depth-First Search, Breadth-First Search, Binary Tree
+- **Date Solved:** 2026-09-30
+- **Runtime:** N/A
+- **Memory:** N/A
+
+---
+
+## 📝 Problem Statement
+
+Given the roots of two binary trees `p` and `q`, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+ 
+
+### Example 1:
+
+```
+**Input:** p = [1,2,3], q = [1,2,3]
+**Output:** true
+```
+
+### Example 2:
+
+```
+**Input:** p = [1,2], q = [1,null,2]
+**Output:** false
+```
+
+### Example 3:
+
+```
+**Input:** p = [1,2,1], q = [1,1,2]
+**Output:** false
+```
+
+ 
+
+**Constraints:**
+
+- The number of nodes in both trees is in the range `[0, 100]`.
+
+	- `-104 4`
+
+---
+
+## 💡 Solution
+
+```python
+# Solution code
+```
+
+---
+
+## ⏱️ Complexity Analysis
+
+- **Time Complexity:** $O(n)$
+- **Space Complexity:** $O(1)$
