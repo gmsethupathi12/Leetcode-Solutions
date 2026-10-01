@@ -3,8 +3,8 @@
 > Auto-synced repository containing solved LeetCode problems organized strictly by data structure and algorithmic topics.
 
 ![LeetCode Sync](https://img.shields.io/badge/LeetCode-Sync-orange?logo=leetcode)
-![Problems Solved](https://img.shields.io/badge/Solved-32-brightgreen)
-![Easy](https://img.shields.io/badge/Easy-19-green)
+![Problems Solved](https://img.shields.io/badge/Solved-35-brightgreen)
+![Easy](https://img.shields.io/badge/Easy-22-green)
 ![Medium](https://img.shields.io/badge/Medium-8-yellow)
 ![Hard](https://img.shields.io/badge/Hard-5-red)
 
@@ -14,7 +14,7 @@
 
 | Total Solved | Easy | Medium | Hard |
 |:---:|:---:|:---:|:---:|
-| **32** | 19 | 8 | 5 |
+| **35** | 22 | 8 | 5 |
 
 ---
 
@@ -67,21 +67,24 @@
 | 2235 | [Add Two Integers](math/2235_add_two_integers.md) | `Easy` | [View Solution](math/2235_add_two_integers.md) |
 | 2413 | [Smallest Even Multiple](math/2413_smallest_even_multiple.md) | `Easy` | [View Solution](math/2413_smallest_even_multiple.md) |
 
-### 🥞 Stacks And Queues (2)
+### 🥞 Stacks And Queues (3)
 
 | # | Problem Title | Difficulty | Solution |
 |:---:|:---|:---:|:---:|
 | 20 | [Valid Parentheses](stacks-and-queues/20_valid_parentheses.md) | `Easy` | [View Solution](stacks-and-queues/20_valid_parentheses.md) |
+| 387 | [First Unique Character in a String](stacks-and-queues/387_first_unique_character.md) | `Easy` | [View Solution](stacks-and-queues/387_first_unique_character.md) |
 | 1475 | [Final Prices With a Special Discount in a Shop](stacks-and-queues/1475_final_prices_with_a_special_discount.md) | `Easy` | [View Solution](stacks-and-queues/1475_final_prices_with_a_special_discount.md) |
 
-### 📝 Strings (4)
+### 📝 Strings (6)
 
 | # | Problem Title | Difficulty | Solution |
 |:---:|:---|:---:|:---:|
 | 3 | [Longest Substring Without Repeating Characters](strings/3_longest_substring.md) | `Medium` | [View Solution](strings/3_longest_substring.md) |
 | 5 | [Longest Palindromic Substring](strings/5_longest_palindrome.md) | `Medium` | [View Solution](strings/5_longest_palindrome.md) |
 | 12 | [Integer to Roman](strings/12_integer_to_roman.md) | `Medium` | [View Solution](strings/12_integer_to_roman.md) |
+| 28 | [Find the Index of the First Occurrence in a String](strings/28_find_the_index_of_the_first_occurrence.md) | `Easy` | [View Solution](strings/28_find_the_index_of_the_first_occurrence.md) |
 | 151 | [Reverse Words in a String](strings/151_reverse_words.md) | `Medium` | [View Solution](strings/151_reverse_words.md) |
+| 1108 | [Defanging an IP Address](strings/1108_defanging_an_ip_address.md) | `Easy` | [View Solution](strings/1108_defanging_an_ip_address.md) |
 
 ### 🌳 Trees (4)
 
@@ -107,18 +110,3 @@
 
 ---
 *Auto-generated with ❤️ by [LeetCode GitHub Auto-Sync](https://github.com)*
-
-
-### 📁 STRINGS
-| 1108 | [Defanging an IP Address](strings/1108_defanging_an_ip_address.md) | `Easy` | [View Solution](strings/1108_defanging_an_ip_address.md) |
-
-| # | Problem Title | Difficulty | Solution |
-|:---:|:---|:---:|:---:|
-| 28 | [Find the Index of the First Occurrence in a String](strings/28_find_the_index_of_the_first_occurrence.md) | `Easy` | [View Solution](strings/28_find_the_index_of_the_first_occurrence.md) |
-
-
-### 📁 STACKS-AND-QUEUES
-
-| # | Problem Title | Difficulty | Solution |
-|:---:|:---|:---:|:---:|
-| 387 | [First Unique Character in a String](stacks-and-queues/387_first_unique_character.md) | `Easy` | [View Solution](stacks-and-queues/387_first_unique_character.md) |
