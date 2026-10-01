@@ -58,8 +58,8 @@ A *defanged IP address* replaces every period `"."` with `"[.]"`.
 
 ```java
 class Solution {
-    public int strStr(String haystack, String needle) {
-      return haystack. indexOf(needle);
+    public String defangIPaddr(String address) {
+        return address.replace(".","[.]");
     }
 }
 ```
