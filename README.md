@@ -107,3 +107,10 @@
 
 ---
 *Auto-generated with ❤️ by [LeetCode GitHub Auto-Sync](https://github.com)*
+
+
+### 📁 STRINGS
+
+| # | Problem Title | Difficulty | Solution |
+|:---:|:---|:---:|:---:|
+| 28 | [Find the Index of the First Occurrence in a String](strings/28_find_the_index_of_the_first_occurrence.md) | `Easy` | [View Solution](strings/28_find_the_index_of_the_first_occurrence.md) |
