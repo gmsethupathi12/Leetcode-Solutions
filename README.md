@@ -115,3 +115,10 @@
 | # | Problem Title | Difficulty | Solution |
 |:---:|:---|:---:|:---:|
 | 28 | [Find the Index of the First Occurrence in a String](strings/28_find_the_index_of_the_first_occurrence.md) | `Easy` | [View Solution](strings/28_find_the_index_of_the_first_occurrence.md) |
+
+
+### 📁 STACKS-AND-QUEUES
+
+| # | Problem Title | Difficulty | Solution |
+|:---:|:---|:---:|:---:|
+| 387 | [First Unique Character in a String](stacks-and-queues/387_first_unique_character.md) | `Easy` | [View Solution](stacks-and-queues/387_first_unique_character.md) |
