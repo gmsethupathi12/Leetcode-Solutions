@@ -110,6 +110,7 @@
 
 
 ### 📁 STRINGS
+| 1108 | [Defanging an IP Address](strings/1108_defanging_an_ip_address.md) | `Easy` | [View Solution](strings/1108_defanging_an_ip_address.md) |
 
 | # | Problem Title | Difficulty | Solution |
 |:---:|:---|:---:|:---:|
