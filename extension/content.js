@@ -42,7 +42,7 @@
   let lastSubmissionPayload = null;
   let lastSyncTimestamp = 0;
 
-  // Slug simplifier
+  // Clean problem title slug
   function cleanSlug(slug) {
     let s = (slug || "").toLowerCase();
     const replacements = [
@@ -52,6 +52,8 @@
       [/-in-a-string.*/g, ""],
       [/-two-sorted-lists/g, "-sorted-lists"],
       [/-to-buy-and-sell-stock/g, "-to-buy-sell-stock"],
+      [/-in-a-shop.*/g, ""],
+      [/-in-a-sorted-matrix/g, "_sorted_matrix"],
     ];
     for (const [pattern, repl] of replacements) {
       s = s.replace(pattern, repl);
@@ -128,7 +130,6 @@
   }
 
   function getMonacoCode() {
-    // Attempt DOM text extraction from Monaco lines
     const lines = document.querySelectorAll(".view-line");
     if (lines && lines.length > 0) {
       return Array.from(lines).map(line => line.textContent).join("\n");
@@ -145,14 +146,14 @@
     toast.style.position = "fixed";
     toast.style.bottom = "24px";
     toast.style.right = "24px";
-    toast.style.zIndex = "999999";
-    toast.style.background = type === "success" ? "#1e293b" : "#881337";
+    toast.style.zIndex = "9999999";
+    toast.style.background = type === "success" ? "#0f172a" : "#881337";
     toast.style.border = `1px solid ${type === "success" ? "#10b981" : "#f43f5e"}`;
     toast.style.borderRadius = "8px";
     toast.style.padding = "14px 18px";
     toast.style.color = "#f8fafc";
-    toast.style.fontSize = "14px";
-    toast.style.fontWeight = "500";
+    toast.style.fontSize = "13px";
+    toast.style.fontWeight = "600";
     toast.style.boxShadow = "0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3)";
     toast.style.display = "flex";
     toast.style.alignItems = "center";
@@ -174,23 +175,17 @@
     }, 5000);
   }
 
-  async function handleAcceptedSolve(stats = {}) {
-    const now = Date.now();
-    if (now - lastSyncTimestamp < 4000) {
-      return; // prevent rapid duplicate triggers
-    }
-    lastSyncTimestamp = now;
-
+  async function performSync(stats = {}) {
     const titleSlug = getProblemSlug();
-    if (!titleSlug) return;
+    if (!titleSlug) return { success: false, error: "Not on a LeetCode problem page." };
 
-    showToast("Accepted detected! Syncing to GitHub in 1s...", "success");
+    showToast("Syncing solution to GitHub in 1s...", "success");
 
     try {
       const qData = await fetchQuestionData(titleSlug);
       if (!qData) {
         showToast("Could not retrieve problem metadata.", "error");
-        return;
+        return { success: false, error: "Could not retrieve problem metadata." };
       }
 
       const qid = qData.questionFrontendId;
@@ -248,41 +243,72 @@ ${code}
 - **Space Complexity:** $O(1)$
 `;
 
-      chrome.runtime.sendMessage(
-        {
-          action: "SYNC_SOLUTION",
-          data: {
-            problem: { qid, title, difficulty, titleSlug },
-            code,
-            lang,
-            category,
-            filename,
-            markdown
+      return new Promise((resolve) => {
+        chrome.runtime.sendMessage(
+          {
+            action: "SYNC_SOLUTION",
+            data: {
+              problem: { qid, title, difficulty, titleSlug },
+              code,
+              lang,
+              category,
+              filename,
+              markdown
+            }
+          },
+          response => {
+            if (response && response.success) {
+              showToast(`Auto-synced to GitHub: ${response.filePath} ✨`, "success", response.commitUrl);
+              resolve({ success: true, filePath: response.filePath, commitUrl: response.commitUrl });
+            } else {
+              showToast(`Sync Failed: ${response?.error || "Unknown error"}`, "error");
+              resolve({ success: false, error: response?.error || "Unknown error" });
+            }
           }
-        },
-        response => {
-          if (response && response.success) {
-            showToast(`Auto-synced to GitHub: ${response.filePath} ✨`, "success", response.commitUrl);
-          } else {
-            showToast(`Sync Failed: ${response?.error || "Unknown error"}`, "error");
-          }
-        }
-      );
+        );
+      });
     } catch (err) {
       console.error("[Auto-Sync Error]", err);
       showToast(`Error: ${err.message}`, "error");
+      return { success: false, error: err.message };
     }
   }
 
-  // Intercept submit button click
+  async function handleAcceptedSolve(stats = {}) {
+    const now = Date.now();
+    if (now - lastSyncTimestamp < 4000) {
+      return; // prevent rapid duplicate triggers
+    }
+    lastSyncTimestamp = now;
+    await performSync(stats);
+  }
+
+  // Listen for exact code from injected main-world script
+  window.addEventListener("message", event => {
+    if (event.data?.type === "LEETCODE_SUBMIT_PAYLOAD") {
+      lastSubmissionPayload = {
+        typed_code: event.data.code,
+        lang: event.data.lang || "python3"
+      };
+      console.log("[LeetCode Sync] Intercepted submit payload with full code!");
+    } else if (event.data?.type === "LEETCODE_MONACO_CODE") {
+      if (!lastSubmissionPayload || !lastSubmissionPayload.typed_code) {
+        lastSubmissionPayload = {
+          typed_code: event.data.code,
+          lang: "python3"
+        };
+      }
+    }
+  });
+
+  // Intercept submit button click (fallback)
   document.addEventListener(
     "click",
     e => {
       const btn = e.target.closest("button");
       if (btn && (btn.innerText?.includes("Submit") || btn.getAttribute("data-e2e-locator") === "console-submit-button")) {
-        // Capture active code right on submit click
         const code = getMonacoCode();
-        if (code) {
+        if (code && (!lastSubmissionPayload || !lastSubmissionPayload.typed_code)) {
           lastSubmissionPayload = { typed_code: code, lang: "python3" };
         }
       }
@@ -298,13 +324,11 @@ ${code}
           const el = node;
           const text = el.innerText || "";
           
-          // Check for Accepted banner
           if (
             (el.getAttribute("data-e2e-locator") === "submission-result" && text.includes("Accepted")) ||
             (el.classList && el.classList.contains("text-green-s") && text.includes("Accepted")) ||
             (text.includes("Accepted") && (text.includes("Runtime:") || text.includes("Beats") || text.includes("Memory:")))
           ) {
-            // Extract runtime & memory if present in parent text
             const parentText = el.closest('[data-layout-path]')?.innerText || el.parentElement?.innerText || text;
             const runtimeMatch = parentText.match(/Runtime\s*([0-9]+\s*ms(?:\s*\(Beats\s*[0-9.]+%\))?)/i);
             const memoryMatch = parentText.match(/Memory\s*([0-9.]+\s*MB(?:\s*\(Beats\s*[0-9.]+%\))?)/i);
@@ -321,4 +345,12 @@ ${code}
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
+
+  // Message listener from extension popup (e.g. force sync active tab)
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "FORCE_SYNC_ACTIVE") {
+      performSync().then(result => sendResponse(result));
+      return true;
+    }
+  });
 })();

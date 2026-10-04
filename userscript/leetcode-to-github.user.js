@@ -58,7 +58,7 @@
 
   // Menu commands for configuration
   GM_registerMenuCommand("⚙️ Configure GitHub Repo & Token", () => {
-    const curRepo = GM_getValue("GH_REPO", "gmsethupathi12/Leetcode-Solutions");
+    const curRepo = GM_getValue("GH_REPO", "");
     const curToken = GM_getValue("GH_TOKEN", "");
     const curBranch = GM_getValue("GH_BRANCH", "main");
 
